@@ -1,0 +1,126 @@
+
+Crafty v23.3 (1 cpus)
+
+White(1): read
+              puzzling over a move to ponder.
+              depth   time  score   variation (1)
+               10->   0.24   4.96   22. e5 d5 23. Rxd5 Qa6 24. exf6+ Bxf6
+                                    25. Qe3+ Kf8 26. Rh7 Rc8 27. Qh6+ Kg8
+               11     0.40   4.74   22. e5 d5 23. Rxd5 Rb6 24. Rhd1 Rc6
+                                    25. exf6+ Bxf6 26. Rd7+ Kf8 27. Qd5
+                                    Re6 28. Qc5+ Re7
+               11->   0.48   4.74   22. e5 d5 23. Rxd5 Rb6 24. Rhd1 Rc6
+                                    25. exf6+ Bxf6 26. Rd7+ Kf8 27. Qd5
+                                    Re6 28. Qc5+ Re7
+               12     0.83     +1   22. e5!                    
+               12     0.99   5.25   22. e5 d5 23. Rhd1 Rd8 24. Rf4 Bh8
+                                    25. exf6+ Ke6 26. a4 bxa4 27. Qg4+
+                                    Kd6 28. Rxa4 Qc5
+               12->   1.05   5.25   22. e5 d5 23. Rhd1 Rd8 24. Rf4 Bh8
+                                    25. exf6+ Ke6 26. a4 bxa4 27. Qg4+
+                                    Kd6 28. Rxa4 Qc5
+               13     1.45   5.32   22. e5 d5 23. Rhd1 Qb6 24. Rf4 Kf8
+                                    25. exf6 Bh8 26. Rxd5 Bxf6 27. Rxf6
+                                    Qxf6 28. Qxf6 <HT>
+               13->   1.61   5.32   22. e5 d5 23. Rhd1 Qb6 24. Rf4 Kf8
+                                    25. exf6 Bh8 26. Rxd5 Bxf6 27. Rxf6
+                                    Qxf6 28. Qxf6 <HT>
+               14     2.23   5.39   22. e5 d5 23. Rhd1 Rd8 24. Rf4 Bh8
+                                    25. exf6+ Ke6 26. Rb4 Qa6 27. Qg4+
+                                    Kd6 28. Qf4+ Kc6 29. a4 bxa4 30. Rxa4
+               14->   2.47   5.39   22. e5 d5 23. Rhd1 Rd8 24. Rf4 Bh8
+                                    25. exf6+ Ke6 26. Rb4 Qa6 27. Qg4+
+                                    Kd6 28. Qf4+ Kc6 29. a4 bxa4 30. Rxa4
+               15     3.58     +1   22. e5!                    
+               15     4.54     +3   22. e5!                    
+White(22): e5 [pondering]
+              time surplus  10:30  time limit 46.15 (+0.00) (4:36)
+              depth   time  score   variation (1)
+               11     0.31     -1   22. ... Rh8!                    
+               11->   0.50   7.34   22. ... Rh8 23. Rhd1 Ke8 24. exf6 Bf8
+                                    25. Qd5 Qc7 26. Qa8+ Kd7 27. Re4 Qc5
+                                    28. Qe8+ Kc7 29. Qxf7+
+               12     0.59     +1   22. ... Rh8?                    
+               12     0.82   7.80   22. ... Rh8 23. Rhd1 Kd7 24. Rxd6+
+                                    Kc8 25. exf6 Bh6 26. Qd5 Kb8 27. Rd7
+                                    Qb6 28. Qxf7 Bg5
+               12     2.30   7.53   22. ... d5 23. exf6+ Bxf6 24. Qe3+
+                                    Kf8 25. Rxd5 <HT>
+               12->   2.31   7.53   22. ... d5 23. exf6+ Bxf6 24. Qe3+
+                                    Kf8 25. Rxd5 <HT>
+               13     2.31   7.53   22. ... d5 23. exf6+ Bxf6 24. Qe3+
+                                    Kf8 25. Rxd5 <HT>
+               13->   2.47   7.53   22. ... d5 23. exf6+ Bxf6 24. Qe3+
+                                    Kf8 25. Rxd5 <HT>
+               14     2.47   7.53   22. ... d5 23. exf6+ Bxf6 24. Qe3+
+                                    Kf8 25. Rxd5 <HT>
+               14->   2.76   7.53   22. ... d5 23. exf6+ Bxf6 24. Qe3+
+                                    Kf8 25. Rxd5 <HT>
+               15     4.78     -1   22. ... d5!                    
+               15     6.02     -3   22. ... d5!                    
+               15    13.44   7.57   22. ... d5 23. Rxd5 Rb6 24. exf6+ Bxf6
+                                    25. Qe3+ Kf8 26. Qc5+ Kg7 27. Qc8 Bh4
+                                    28. b4 Qa6 29. Qxa6 Rxa6 30. Rxh4 Kf6
+                                    31. Rxb5 Rxa3
+               15->  14.56   7.57   22. ... d5 23. Rxd5 Rb6 24. exf6+ Bxf6
+                                    25. Qe3+ Kf8 26. Qc5+ Kg7 27. Qc8 Bh4
+                                    28. b4 Qa6 29. Qxa6 Rxa6 30. Rxh4 Kf6
+                                    31. Rxb5 Rxa3
+               16    16.44   7.52   22. ... d5 23. Rxd5 Rb6 24. exf6+ Bxf6
+                                    25. Qe3+ Kf8 26. Qc5+ Kg7 27. Qc8 Bh4
+                                    28. b4 Qa6 29. Qxa6 Rxa6 30. Rxh4 Rb6
+                                    31. Rd8
+               16->  21.10   7.52   22. ... d5 23. Rxd5 Rb6 24. exf6+ Bxf6
+                                    25. Qe3+ Kf8 26. Qc5+ Kg7 27. Qc8 Bh4
+                                    28. b4 Qa6 29. Qxa6 Rxa6 30. Rxh4 Rb6
+                                    31. Rd8
+               17    29.04   7.34   22. ... d5 23. Rxd5 Rb6 24. exf6+ Bxf6
+                                    25. Qe3+ Kf8 26. Qc5+ Kg7 27. Qc8 Bh4
+                                    28. b4 Qa6 29. Qxa6 Rxa6 30. Rxh4 Rxa3
+                                    31. Rxb5 Re3
+               17->  35.16   7.34   22. ... d5 23. Rxd5 Rb6 24. exf6+ Bxf6
+                                    25. Qe3+ Kf8 26. Qc5+ Kg7 27. Qc8 Bh4
+                                    28. b4 Qa6 29. Qxa6 Rxa6 30. Rxh4 Rxa3
+                                    31. Rxb5 Re3
+               18     1:00     +1   22. ... d5?                    
+               18     1:10     +3   22. ... d5?                    
+               18     1:12   8.71   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 Kf6 29. Rxb5 Rxg7 30. Rxg7
+                                    Kxg7 31. Rxd5 Kf6
+               18->   3:19   8.71   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 Kf6 29. Rxb5 Rxg7 30. Rxg7
+                                    Kxg7 31. Rxd5 Kf6
+               19     4:09   8.99   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 Kf6 29. Rxb5 Rxg7 30. Rxg7
+                                    Kxg7 31. Ra5 a6 32. Rxa6
+               19->   6:02   8.99   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 Kf6 29. Rxb5 Rxg7 30. Rxg7
+                                    Kxg7 31. Ra5 a6 32. Rxa6
+               20     8:22   9.16   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 Kf6 29. Rxb5 Rxg7 30. Rxg7
+                                    Kxg7 31. Ra5 Kf6 32. Rxa7 d4
+               20->  12:11   9.16   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 Kf6 29. Rxb5 Rxg7 30. Rxg7
+                                    Kxg7 31. Ra5 Kf6 32. Rxa7 d4
+               21    17:53   9.22   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 a6 29. a4 Kd6 30. Kb3 Kc5
+                                    31. Kc3 Kd6 32. Rd4 Ke6 33. axb5 axb5
+               21->  22:20   9.22   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 a6 29. a4 Kd6 30. Kb3 Kc5
+                                    31. Kc3 Kd6 32. Rd4 Ke6 33. axb5 axb5
+               22    36:54   9.31   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 Kf6 29. Rxb5 g5 30. Rxd5
+                                    Kg6 31. Rh8 <HT>
+               22->  51:11   9.31   22. ... d5 23. Rh7 Qe1+ 24. Ka2 Ke6
+                                    25. exf6 Qe5 26. Qxe5+ Kxe5 27. fxg7
+                                    Rg8 28. Rb4 Kf6 29. Rxb5 g5 30. Rxd5
+                                    Kg6 31. Rh8 <HT>
