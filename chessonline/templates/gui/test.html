@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block contents %}
+    <div class="screenmask">
+        <div style="padding-top: 23em; width: 33%; margin: 0 auto; z-index: 10000;">
+            <div id="loadMovesPB"></div>
+        </div>
+    </div>
+    <div style="margin-left: 1em;">
+        <a href="/">Volver a inicio</a>
+    </div>
+    <div style="padding: 1em;">
+        <p>
+            <div style="width: 33%; margin: 0 auto;" id="boardContainer"></div>
+            <div style="width: 80%; margin-left: 20%; position: fixed;">
+                <label for="txtPgn">Mover:</label>
+                <input name="txtPgn" id="txtPgn" type="text" size="80"></input>
+                <input type="button" id='btnPrev' value="&nbsp;&lt;&nbsp;"></input>
+                <input type="button" id='btnNext' value="&nbsp;&gt;&nbsp;"></input>
+                <br/>
+                <input type="button" value="Nueva Partida" id="btnNew" />&nbsp;
+                <input type="button" value="Toggle" id="btnToggle" />&nbsp;
+                <label for="btnFlip">Flip&nbsp;</label>
+                <input type="checkbox" id="btnFlip" />&nbsp;
+                <input id="btnUndo" type="button" value="Deshacer &uacute;ltimo movimiento"></input>&nbsp;
+                <br/>
+                <label for="cboGreatGames">Grandes partidas de la historia:&nbsp;</label>
+                <select id="cboGreatGames"></select>
+            </div>
+        </p>
+    </div>
+{% endblock %}
+{% block js2 %}
+{{ block.super }}
+<script type="text/javascript" src="/media/js/jquery.chessboard-0.1.js"></script>
+<script type="text/javascript">
+    
+/*    function highLightCurrent() {
+        $("#moveList>span.movement").removeClass("borderdotted");
+        $("#moveList>span.movement:nth(" + $cb.currentPosition + ")").addClass("borderdotted");
+        
+    }
+*/    
+
+    function onToggle() {$cb.togglePieces();}
+
+    function onUndo() {
+                $cb.fens.pop();
+                $cb.pgnmoves.pop();
+                $("#moveList>span:last").remove();
+                $cb.setPosition();
+                $cb.refreshMoveList();
+                //highLightCurrent();
+                }
+
+    function onFlip() {$cb.flipBoard();}
+    
+    function onTxtPgn(ev) {
+        if($("#txpPgn").val() == "")
+            return;
+        if (ev.type == "keypress" && ev.which != 13)
+            return;
+        var moves = $("#txtPgn").val().split(/\s+/);
+        $("#txtPgn").val("");
+
+        for (var i in moves) {
+            var fen = $cb.fens[$cb.fens.length - 1];
+            var resp = fen.move(moves[i]);
+            if (resp && resp.position.isLegal()) {
+/*              $cb.fens.push(resp.position);
+                $cb.pgnmoves.push(resp.move);
+                $cb.setPosition();
+                var ev = $.Event("moveMade");
+                $cb.ui.trigger(ev, resp.move); */
+                $cb.makeMove(moves[i]);
+            }
+        }
+    }
+    
+    function completeMoves(arrmoves, movenum, origlength, whowins) {
+        if (arrmoves.length) {
+            var percent = Math.round(movenum / origlength * 100);
+            $("#loadMovesPB").progressbar("option", "value", percent);
+            var fen = $cb.fens[$cb.fens.length - 1];
+            var resp = fen.move(arrmoves[0]);
+            if (resp && resp.position.isLegal()) {
+                $cb.makeMove(arrmoves[0]);
+            }
+            setTimeout(function(){
+                completeMoves(arrmoves.slice(1, arrmoves.length), ++movenum, origlength, whowins);     
+            }, 0);
+            return;
+        }
+        else {
+            $cb.setPosition(0);
+            //highLightCurrent();
+            switch (whowins) {
+                case 'b':
+                    if (!$cb.flipped)
+                        $cb.flipBoard();
+                    break;
+                case 'w':
+                default:
+                    if ($cb.flipped)
+                        $cb.flipBoard();
+                    break;
+                }
+            $(".screenmask").hide("slow");
+        }
+    }
+        
+    function newBoard() {
+        $("#boardContainer, #moveList").children().remove();
+        $cb = new $.chessBoard({id: 'cb1',
+                                       container: '#boardContainer',
+                                       // size: undefined,
+                                       // bSqColor: /*"steelblue"*/ undefined,
+                                       // wSqColor: undefined,
+                                       // opacity: undefined,
+                                       flipped: $("#btnFlip").attr("checked")
+                                       });
+        $("#moveList").append($('<span class="movement">&nbsp;&nbsp;</span>'));
+        //highLightCurrent();
+        }
+
+    function onMoveMade(ev, move) {
+                   //$("#moveList").append($('<span class="movement">&nbsp;' + move + '&nbsp;</span>'));
+                   //highLightCurrent();
+                   }
+
+    function onMoveClick() {
+        $cb.setPosition($(this).index());
+        //highLightCurrent();
+    }
+    
+    function loadGreatGames() {
+        for (var i in greatGames) {
+            var title = greatGames[i].white + " - " + greatGames[i].black;
+            $("#cboGreatGames").append($("<option value=" + i + ">" + title + "</option>"));
+            }
+        $("#cboGreatGames option:first").attr("selected", "selected");
+        $("#cboGreatGames option").bind("click", function() {
+            $(".screenmask").show();
+            newBoard();
+            var id = parseInt($("#cboGreatGames option:selected").val());
+            var moves = greatGames[id].moves.split(/\s+/);
+            setTimeout(function() {
+                completeMoves(moves, 0, moves.length, greatGames[id].wins);
+                }, 0);
+        });
+    }
+    
+    function nextMove() {
+        if ($cb.currentPosition == $cb.fens.length - 1)
+            return;
+        $cb.currentPosition += 1;
+        $cb.setPosition($cb.currentPosition);
+        //highLightCurrent();
+    }
+    
+    function prevMove() {
+        if ($cb.currentPosition == 0)
+            return;
+        $cb.currentPosition -= 1;
+        $cb.setPosition($cb.currentPosition);
+        //highLightCurrent();
+    }
+    
+    function onInit() {
+            //$cb.ui.draggable();
+            $("#loadMovesPB").progressbar();
+            $(document).bind("moveMade", onMoveMade);
+            $("#moveList>span.movement").live("click", onMoveClick);
+            $("#btnFlip").click(onFlip);
+            $("#btnNew").click(newBoard);
+            $("#btnToggle").click(onToggle);
+            $("#btnUndo").click(onUndo);
+            $("#txtPgn").bind("click keypress", onTxtPgn);
+            $("#btnPrev").bind("click", prevMove);
+            $("#btnNext").bind("click", nextMove);
+            loadGreatGames();
+            newBoard();
+            //highLightCurrent();
+    }
+    
+    $(document).ready(onInit);
+</script>
+{% endblock %}

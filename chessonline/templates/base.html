@@ -1,0 +1,33 @@
+{% block heading %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>.::. Chess Club .::.   -   {{ titleinfo }}</title>
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="/media/css/cupertino/jquery-ui-1.8.8.custom.css" />
+    <link rel="stylesheet" type="text/css" href="/media/css/base.css" />
+    {% endblock css %}
+    {% block js1 %}
+    {% endblock js1 %}
+</head>
+
+<body>
+{% endblock heading %}
+    {% block headline %}
+    <h3 class="headline">{{ titleinfo }}</h3>
+    <div id="logindata" style="position: fixed; right: 3px; top: 3px;">{{ username }}</div>
+    {% endblock headline %}
+    <div id="contents">
+    {% block contents %}
+    <p>Contenidos de la p&aacute;gina</p>
+    {% endblock contents %}
+    </div>
+    {% block js2 %}
+    <script type="text/javascript" src="/media/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/media/js/jquery.corner.js"></script>
+    <script type="text/javascript" src="/media/js/jquery-ui-1.8.8.custom.min.js"></script>
+    {% endblock js2 %}
+{% block footer %}
+</body>
+</html>
+{% endblock footer %}

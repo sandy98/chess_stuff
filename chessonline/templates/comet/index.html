@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block contents %}
+    <div style="margin-left: 1em;">
+        <a href="/">Volver a inicio</a>
+        <p>
+            <label for="txtChatArea">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <div name="txtChatArea" id="txtChatArea" style="font-size: small; overflow: auto; margin: auto; width: 80%; height: 20em; background-color: #fff; border: solid 2px;">
+            </div> 
+        </p>
+    </div>
+    <p style="width: 80%; margin: auto; padding-top: 1em;">
+        <label for="txtSendChat">Mensaje:</label>
+        <input type="text" name="txtSendChat" id="txtSendChat" size="105"></input> 
+    </p>
+    <div id="status" style="position: fixed; right: 3px; top: 33px; background-color: red; color: red; width: 1em;">X</div>
+
+{% endblock %}
+
+{% block js2 %}
+{{ block.super }}
+<script> document.domain = document.domain; </script>
+<!--<script type="text/javascript" src="/media/js/Orbited.js"></script>-->
+<script type="text/javascript" src="http://{{ hostname }}:{{ orbited_port }}/static/Orbited.js"></script>
+<script>TCPSocket = Orbited.TCPSocket;</script>
+<!--<script type="text/javascript" src="http://{{ hostname }}:{{ orbited_port }}/static/protocols/stomp/stomp.js"></script>-->
+<script type="text/javascript">
+
+    createNewChatLine = function(sender, data) {
+        var stri = '<div style="border-bottom: dotted 1px; padding-bottom: 2px; padding-top: 2px;">';
+        stri += '<span style="color: blue; font-weight: bold;">&nbsp;&nbsp;' + sender + ':&nbsp;&nbsp;</span>';
+        stri += '<span style="font-family: script; font-style: italic;">' + data + '</span></div>';
+        return $(stri);    
+    };
+    
+    connected = false;
+    CHANNEL_NAME = "/chat/general";
+    chatArea = document.getElementById("txtChatArea");
+    sendChat = document.getElementById("txtSendChat");
+    $("#status").click(function() {
+        if (connected)
+            conn.close();
+        else
+            conectar();
+        }).css("cursor", "pointer");
+    
+    conn = new TCPSocket();
+
+    conectar = function() {
+        if (!connected) {
+            if (conn.readyState != conn.READY_STATE_INITIALIZED)
+                conn.readyState = conn.READY_STATE_INITIALIZED;
+            conn.open(location.hostname, {{ twisted_port }});    
+        }
+    };
+    
+    conn.onopen = function() {
+        connected = true;
+        $(chatArea).html("");    
+        $("#status").css({color: '#6a6', backgroundColor: '#6a6'});
+        var myobj = {type: 'LOGIN', uid: {{ uid }}, username: '{{ username }}'};
+        var stri = JSON.stringify(myobj);
+        conn.send(stri);
+   };
+    
+    conn.onread = function(msg) {
+        var msgs = msg.split("\r\n");
+        for (var m in msgs) {
+            if (!msgs[m].length)
+                continue;
+            try {
+                var objmsg = JSON.parse(msgs[m]);
+                processMessage(objmsg);
+            }
+            catch(e) {
+                createNewChatLine("ERROR", e.toString()).appendTo($(chatArea));
+            }
+        }
+    }
+    
+    function processMessage(msg) {
+        switch(msg.type.toLowerCase()) {
+            case 'chat':
+                processChat(msg);
+                break;
+            default:
+                break;
+            }    
+    }
+    
+    function processChat(msg) {
+        createNewChatLine(msg.sender, atob(msg.value)).appendTo($(chatArea));
+        chatArea.scrollTop = chatArea.scrollHeight;
+    };
+    
+    
+    conn.onclose = function(data) {
+        connected = false;
+        $("#status").css({color: 'red', backgroundColor: 'red'});
+        $(chatArea).html("");    
+    };
+    
+    sendChat.onkeypress = function(ev) {
+        var evt = ev ? ev : window.event;
+        var keycode = evt.keyCode;
+        if (keycode == 13) {
+            try {
+                if(connected) {
+                    //$.post("sendchat",
+                    //       {msg: JSON.stringify({type: 'CHAT_GENERAL', data: sendChat.value}),
+                    //        channel: CHANNEL_NAME});
+                    var arr = [];
+                    for (i in sendChat.value)
+                        arr.push(sendChat.value.charCodeAt(i))
+                    var myobj = {type: 'CHAT', value: btoa(sendChat.value), sender: '{{ username }}'};
+                    var stri = JSON.stringify(myobj);
+                    conn.send(stri);
+                }
+                else {
+                     createNewChatLine("MSG", "not connected").appendTo($(chatArea));
+                     return;
+                }
+            }    
+            catch(e) {
+                createNewChatLine("ERROR", e.toString()).appendTo($(chatArea));
+                }
+            sendChat.value = "";
+        }
+    };
+
+    conectar();
+
+</script>
+{% endblock %}

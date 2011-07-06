@@ -1,0 +1,42 @@
+body {
+    background: #f8f8f8;
+    font-family: verdana, sans-serif;
+    font-size: small;
+    padding: 0;
+    margin: 0;
+}
+
+.headline {
+    padding-bottom: 3px;
+    padding-top: 3px;
+    border-bottom: solid 1px;
+    border-bottom-color: #d1cfcc;
+    text-align: center;
+    background: #e0ebff;
+    margin-top: 0;
+}
+
+.borderdotted {
+    border: 1px dotted;
+}
+
+.screenmask { display: none;
+        cursor: wait;
+        z-index: 9999; 
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%; 
+        width: 100%;
+        background-color: #000;
+        opacity: 0.95;
+        /*filter: alpha(opacity = 0);*/}
+
+/*
+.white {
+background-color: #FFCE9E;
+}
+
+.black {
+background-color: #D18B47;
+}
+*/

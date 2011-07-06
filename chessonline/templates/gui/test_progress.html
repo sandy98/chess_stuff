@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block contents %}
+    <div style="margin-left: 1em;">
+        <a href="/">Volver a inicio</a>
+    </div>
+    <div style="padding-top: 2em; width: 33%; margin: 0 auto; z-index: 10000;">
+        <div id="loadMovesPB" style="background-color: red;"></div>
+        <br/><br/>
+    </div>
+    <div style="text-align: center;">
+        <p>&nbsp;</p>
+        <input type="button" value="+" id="btnIncr" />&nbsp;
+        <input type="button" value="-" id="btnDecr" />&nbsp;
+    </div>
+{% endblock %}
+{% block js2 %}
+{{ block.super }}
+<script type="text/javascript" src="/media/js/jquery.chessboard-0.1.js"></script>
+<script type="text/javascript">
+    var percent = 0;
+    
+    function onMinus() {
+        if (percent > 0 ) {
+            percent--;
+            $("#loadMovesPB").progressbar("option", "value", percent);
+        }
+    }
+    
+    function onPlus() {
+        if (percent < 100 ) {
+            percent++;
+            $("#loadMovesPB").progressbar("option", "value", percent);
+        }
+    }
+    
+    
+    function onInit() {
+            $("#loadMovesPB").progressbar();
+            $("#btnDecr").click(function() {onMinus();});
+            $("#btnIncr").click(function() {onPlus();});
+    }
+    
+    $(document).ready(onInit);
+</script>
+{% endblock %}
